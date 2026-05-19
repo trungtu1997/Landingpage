@@ -82,7 +82,7 @@
             background-image: url('images/bg-hero.jpg'); 
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
+
             text-align: center; 
             z-index: 1;
         }
@@ -232,7 +232,11 @@
         /* ==========================================================================
            RESPONSIVE TỐI ƯU (Tablet & Mobile)
            ========================================================================== */
-           
+        @media (min-width: 1025px) {
+            .hero {
+                background-attachment: fixed;
+            }
+        }
         /* Tablet & Màn hình nhỏ (Dưới 1024px) */
         @media (max-width: 1024px) {
             .prog-action { text-align: left; margin-top: 10px; } 
@@ -250,6 +254,7 @@
             .stagger-card:nth-child(even):hover { transform: translateY(-5px); }
             .stagger-card:nth-child(2), .stagger-card:nth-child(4) { transform: translateY(40px); }
             .stagger-card:nth-child(2):hover, .stagger-card:nth-child(4):hover { transform: translateY(35px); }
+
         }
 
         /* Mobile lớn & Tablet dọc (Dưới 800px) */
@@ -259,6 +264,15 @@
             .story-recognition { padding-bottom: 60px; }
             .why-us-staggered { margin-top: 60px; }
             .promise { padding: 60px 0; }
+            .hero {
+                background-size: 200% auto; /* Ép bản đồ thu nhỏ lại vừa khít 100% chiều ngang điện thoại */
+                background-repeat: no-repeat;
+                background-position: center 5%; /* Căn chỉnh vị trí bản đồ nằm chuẩn ngay sau cụm chữ H1 */
+            }
+            
+            .hero::before {
+                background: rgba(255, 255, 255, 0.9); /* Hạ lớp phủ xuống 40% để nhìn rõ chi tiết các lục địa */
+            }
 
             h1, .hero h1 { font-size: 1.8rem; margin-bottom: 1rem; }
             h2, .why-heading, .promise h2 { font-size: 1.6rem; }
