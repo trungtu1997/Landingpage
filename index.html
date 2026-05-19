@@ -61,7 +61,7 @@
             padding: 120px 0 80px; 
             background-color: var(--white); 
             /* Bản đồ thế giới làm nền */
-            background-image: url('images/bg-hero.jpg'); 
+            background-image: url('/images/bg-hero.jpg'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -91,23 +91,113 @@
         .dest-info p { margin: 0; font-size: 0.95rem; opacity: 0.9; }
         .dest-badge { position: absolute; top: 20px; left: 20px; background: rgba(255,255,255,0.95); padding: 5px 12px; border-radius: 4px; font-size: 0.85rem; color: var(--slate-blue); font-weight: 700; z-index: 2; }
 
-        /* 2 & 5. STORY & WHY US (Split Layout) */
-        .story-recognition { background-color: var(--bg-light); }
-        .split-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: stretch; }
-        .split-img { position: relative; border-radius: 12px; overflow: hidden; height: 100%; min-height: 600px; }
-        .split-img img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
-        
-        .split-content { padding: 40px 0; }
-        .trust-box { background: var(--white); padding: 40px 30px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: 40px; border-top: 4px solid var(--slate-blue); }
-        .trust-box h3 { font-size: 1.5rem; margin-bottom: 30px; color: var(--slate-blue); font-weight: 700; }
-        
-        .why-list { list-style: none; }
-        /* Sửa lại khoảng cách icon và text chuẩn chỉnh */
-        .why-list li { display: flex; align-items: flex-start; gap: 20px; margin-bottom: 25px; }
-        .why-list li:last-child { margin-bottom: 0; }
-        .why-list li i { font-size: 1.8rem; color: var(--red-orange); width: 35px; text-align: center; flex-shrink: 0; margin-top: 2px; }
-        .why-list h4 { font-size: 1.15rem; margin-bottom: 8px; font-weight: 700; color: var(--slate-blue); }
-        .why-list p { font-size: 0.95rem; margin: 0; line-height: 1.6; color: var(--slate-blue); }
+        /* ==========================================================================
+        /* ==========================================================================
+        2. STORY & WHY US
+        ========================================================================== */
+        .story-recognition { 
+            background-color: var(--bg-light); 
+            padding-bottom: 140px; /* Tăng padding bottom cho thẻ chẵn bị đẩy xuống */
+        }
+
+        /* --- Phần trên: Split Grid --- */
+        .split-grid { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 80px; 
+            align-items: center; /* Canh giữa, chống kéo giãn ảnh */
+        }
+        .split-img { 
+            position: relative; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            width: 100%; 
+            aspect-ratio: 4 / 4; /* Cố định tỷ lệ ảnh để không bị vỡ */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+        }
+        .split-img img { 
+            position: absolute; 
+            top: 0; left: 0; 
+            width: 100%; height: 100%; 
+            object-fit: cover; 
+        }
+        .split-content { padding: 20px 0; }
+
+        /* --- Phần dưới: Staggered Cards --- */
+        .why-us-staggered { margin-top: 100px; }
+        .why-heading { text-align: center; font-size: 2rem; color: var(--slate-blue); margin-bottom: 60px; font-weight: 700; }
+
+        .staggered-cards { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; align-items: start; }
+        .stagger-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 40px 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.04);
+            height: 100%;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            border: 1px solid rgba(78, 103, 133, 0.05);
+        }
+
+        .stagger-card:hover { box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+
+        /* Hiệu ứng so le */
+        .stagger-card:nth-child(even) { transform: translateY(40px); }
+        .stagger-card:nth-child(even):hover { transform: translateY(35px); }
+        .stagger-card:nth-child(odd):hover { transform: translateY(-5px); }
+
+        /* Thành phần trong thẻ */
+        .card-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--bg-light); padding: 6px 14px;
+            border-radius: 20px; font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px; color: var(--slate-blue);
+            margin-bottom: 25px; width: fit-content;
+        }
+        .card-badge .dot { width: 6px; height: 6px; background: var(--red-orange); border-radius: 50%; }
+
+        .card-icon { font-size: 2rem; color: var(--slate-blue); margin-bottom: 20px; }
+        .stagger-card h3 { font-size: 1.35rem; margin-bottom: 15px; font-weight: 700; z-index: 2; line-height: 1.3; }
+        .stagger-card p { font-size: 0.95rem; line-height: 1.6; opacity: 0.85; z-index: 2; margin: 0; }
+
+        /* Watermark số chìm */
+        .watermark {
+            position: absolute; bottom: -25px; right: 5px;
+            font-size: 14rem; font-weight: 800; line-height: 1;
+            color: rgba(78, 103, 133, 0.04); z-index: 0; user-select: none;
+        }
+
+        /* Thẻ số 4 nổi bật */
+        .stagger-card.highlight { background: var(--slate-blue);; border-color: var(--slate-blue); }
+        .stagger-card.highlight .card-badge { background: rgba(255,255,255,0.15); color: var(--white); }
+        .stagger-card.highlight .card-badge .dot { background: var(--white); }
+        .stagger-card.highlight .card-icon,
+        .stagger-card.highlight h3, 
+        .stagger-card.highlight p { color: var(--white); }
+        .stagger-card.highlight .watermark { color: rgba(255, 255, 255, 0.1); }
+
+        /* --- Responsive --- */
+        @media (max-width: 1024px) {
+            .split-grid { grid-template-columns: 1fr; gap: 40px; }
+            .split-img { aspect-ratio: 16 / 9; }
+            
+            .staggered-cards { grid-template-columns: repeat(2, 1fr); gap: 30px; }
+            .stagger-card:nth-child(even) { transform: translateY(0); }
+            .stagger-card:nth-child(even):hover { transform: translateY(-5px); }
+            .stagger-card:nth-child(2), .stagger-card:nth-child(4) { transform: translateY(40px); }
+            .stagger-card:nth-child(2):hover, .stagger-card:nth-child(4):hover { transform: translateY(35px); }
+        }
+        @media (max-width: 768px) {
+            .story-recognition { padding-bottom: 80px; }
+            .why-heading { font-size: 1.5rem; margin-bottom: 40px; }
+            .staggered-cards { grid-template-columns: 1fr; gap: 20px; }
+            .stagger-card:nth-child(n) { transform: translateY(0) !important; min-height: auto; }
+        }
 
         /* 3. CORE VALUES (Mission Cards) */
         .mission { background-color: var(--white); }
@@ -264,51 +354,58 @@
     </section>
 
     <section id="about" class="story-recognition section-padding">
-        <div class="container split-grid">
-            <div class="split-img">
-                <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=1000&auto=format&fit=crop" alt="Chờ thay ảnh">
-            </div>
+        <div class="container">
             
-            <div class="split-content">
-                <span class="subtitle">CÂU CHUYỆN PHÍA SAU ONEPUFFIN</span>
-                <h2>Người đồng hành đáng tin cậy</h2>
-                <p>ONEPUFFIN Partners được lấy cảm hứng từ loài chim Puffin — biểu tượng của sự bền bỉ, khả năng thích nghi và những hành trình vượt đại dương để tìm kiếm cơ hội mới.</p>
-                <p>Cũng như Puffin luôn tìm được hướng đi giữa những thay đổi khắc nghiệt của môi trường, ONEPUFFIN đồng hành cùng khách hàng trên hành trình định cư và di trú quốc tế bằng sự rõ ràng, tận tâm và niềm tin dài hạn.</p>
-
-                <div class="trust-box">
-                    <h3>Vì sao đối tác và khách hàng lựa chọn chúng tôi?</h3>
-                    <ul class="why-list">
-                        <li>
-                            <i class="fa-solid fa-globe"></i>
-                            <div>
-                                <h4>Tư duy quốc tế</h4>
-                                <p>Am hiểu thị trường và xu hướng di trú toàn cầu, đồng thời luôn cập nhật những thay đổi mới để mang đến giải pháp phù hợp với từng khách hàng và đối tác.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-sitemap"></i>
-                            <div>
-                                <h4>Quy trình rõ ràng</h4>
-                                <p>Xây dựng lộ trình minh bạch, chuyên nghiệp và có hệ thống, giúp khách hàng dễ dàng theo dõi từng giai đoạn trong quá trình triển khai hồ sơ.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-regular fa-handshake"></i>
-                            <div>
-                                <h4>Đồng hành dài hạn</h4>
-                                <p>Không chỉ hỗ trợ xử lý hồ sơ, chúng tôi còn đồng hành cùng khách hàng trong suốt hành trình xây dựng cuộc sống, học tập và phát triển tại môi trường mới.</p>
-                            </div>
-                        </li>
-                        <li>
-                            <i class="fa-solid fa-award"></i>
-                            <div>
-                                <h4>Vận hành chuẩn mực</h4>
-                                <p>Đề cao tính chuyên nghiệp, sự nhất quán và trải nghiệm dịch vụ chất lượng trong mọi quy trình làm việc và tương tác với khách hàng, đối tác.</p>
-                            </div>
-                        </li>
-                    </ul>
+            <div class="split-grid">
+                <div class="split-img">
+                    <img src="images/ket-noi.png" alt="Câu chuyện ONEPUFFIN">
+                </div>
+                
+                <div class="split-content">
+                    <span class="subtitle">CÂU CHUYỆN PHÍA SAU ONEPUFFIN</span>
+                    <h2>Người đồng hành đáng tin cậy</h2>
+                    <p>ONEPUFFIN Partners được lấy cảm hứng từ loài chim Puffin — biểu tượng của sự bền bỉ, khả năng thích nghi và những hành trình vượt đại dương để tìm kiếm cơ hội mới.</p>
+                    <p>Cũng như Puffin luôn tìm được hướng đi giữa những thay đổi khắc nghiệt của môi trường, ONEPUFFIN đồng hành cùng khách hàng trên hành trình định cư và di trú quốc tế bằng sự rõ ràng, tận tâm và niềm tin dài hạn.</p>
                 </div>
             </div>
+
+            <div class="why-us-staggered">
+                <h3 class="why-heading">Vì sao đối tác và khách hàng lựa chọn chúng tôi?</h3>
+                <div class="staggered-cards">
+                    <div class="stagger-card">
+                        <div class="card-badge"><span class="dot"></span> LÝ DO 01</div>
+                        <div class="card-icon"><i class="fa-solid fa-globe"></i></div>
+                        <h3>Tư duy quốc tế</h3>
+                        <p>Am hiểu thị trường và xu hướng di trú toàn cầu, đồng thời luôn cập nhật những thay đổi mới để mang đến giải pháp phù hợp nhất.</p>
+                        <div class="watermark">1</div>
+                    </div>
+                    
+                    <div class="stagger-card">
+                        <div class="card-badge"><span class="dot"></span> LÝ DO 02</div>
+                        <div class="card-icon"><i class="fa-solid fa-sitemap"></i></div>
+                        <h3>Quy trình rõ ràng</h3>
+                        <p>Xây dựng lộ trình minh bạch, chuyên nghiệp và có hệ thống, giúp khách hàng dễ dàng theo dõi từng giai đoạn hồ sơ.</p>
+                        <div class="watermark">2</div>
+                    </div>
+                    
+                    <div class="stagger-card">
+                        <div class="card-badge"><span class="dot"></span> LÝ DO 03</div>
+                        <div class="card-icon"><i class="fa-regular fa-handshake"></i></div>
+                        <h3>Đồng hành dài hạn</h3>
+                        <p>Không chỉ hỗ trợ hồ sơ, chúng tôi còn sát cánh cùng khách hàng trong suốt hành trình xây dựng cuộc sống mới.</p>
+                        <div class="watermark">3</div>
+                    </div>
+                    
+                    <div class="stagger-card highlight">
+                        <div class="card-badge"><span class="dot"></span> LÝ DO 04</div>
+                        <div class="card-icon"><i class="fa-solid fa-award"></i></div> 
+                        <h3>Vận hành chuẩn mực</h3>
+                        <p>Đề cao tính chuyên nghiệp, sự nhất quán và trải nghiệm dịch vụ chất lượng trong mọi quy trình tương tác.</p>
+                        <div class="watermark">4</div>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
 
@@ -320,35 +417,35 @@
             </div>
             <div class="mission-grid">
                 <div class="mission-card">
-                    <img src="https://images.unsplash.com/photo-1508253730651-e5ace80a7025?q=80&w=800&auto=format&fit=crop" alt="Định hướng">
+                    <img src="images/dinh-huong.jpg" alt="Định hướng">
                     <div class="mission-content">
                         <h3>Định hướng<br>& Dẫn đường</h3>
                         <p>Hỗ trợ lộ trình phù hợp giữa các chương trình phức tạp.</p>
                     </div>
                 </div>
                 <div class="mission-card">
-                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?q=80&w=800&auto=format&fit=crop" alt="Bền bỉ">
+                    <img src="images/ben-bi-dang-tin-cay.jpg" alt="Bền bỉ">
                     <div class="mission-content">
                         <h3>Bền bỉ<br>& Đáng tin cậy</h3>
                         <p>Ổn định trước những thay đổi chính sách.</p>
                     </div>
                 </div>
                 <div class="mission-card">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=800&auto=format&fit=crop" alt="Niềm tin">
+                    <img src="images/niem-tin-gan-ket.jpg" alt="Niềm tin">
                     <div class="mission-content">
                         <h3>Niềm tin<br>& Gắn kết</h3>
                         <p>Xây dựng quan hệ dựa trên sự minh bạch.</p>
                     </div>
                 </div>
                 <div class="mission-card">
-                    <img src="https://images.unsplash.com/photo-1436491865332-7a61a109cc05?q=80&w=800&auto=format&fit=crop" alt="Cơ hội">
+                    <img src="images/kham-pha.jpg" alt="Cơ hội">
                     <div class="mission-content">
                         <h3>Khám phá<br>& Cơ hội</h3>
                         <p>Mở ra cơ hội mới trên hành trình toàn cầu hóa.</p>
                     </div>
                 </div>
                 <div class="mission-card">
-                    <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop" alt="Đồng cảm">
+                    <img src="images/dong-cam-ket-noi.jpg" alt="Đồng cảm">
                     <div class="mission-content">
                         <h3>Đồng cảm<br>& Kết nối</h3>
                         <p>Tiếp cận hồ sơ bằng sự thấu hiểu tuyệt đối.</p>
